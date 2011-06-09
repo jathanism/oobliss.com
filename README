@@ -1,0 +1,14 @@
+Project layout should be like this:
+
+oobliss.com
+├── deps.yaml
+├── fabfile.py
+├── membrane.py
+├── roles
+│   ├── dev.yaml
+│   ├── staging.yaml
+│   └── production.yaml
+├── site.yaml
+└── oob 
+
+oob - The Django project for oobliss.com

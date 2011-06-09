@@ -1,0 +1,38 @@
+#on 'silk push -R <rolename>', deploy to these hosts
+push_hosts:
+    - localhost
+#listen for these host headers in nginx
+listen_hosts:
+    - mysite.localhost
+#options to pass to gunicorn on the command line
+gunicorn:
+    workers: 1
+    log-level: debug
+    name: mysite
+    debug: true
+    #you can optionally specify how nginx talks to gunicorn
+    #default is a unix socket
+    #bind: unix:/tmp/somewhere.sock
+    bind: localhost:8000
+#environment variables to pass in to the process
+env:
+    DJANGO_DB_HOST: localhost
+    DJANGO_DB_NAME: some_db_name
+    DJANGO_DB_USER: some_db_user
+    DJANGO_DB_PASS: some_db_pwd
+    DJANGO_DEBUG: "1"
+# If you don't like environment variables, you can import
+# silk and have it read all these settings from the blame.yaml file
+# instead.  See silk/extras/django_local_settings.py for an example.
+# 'app_config' isn't hard-coded anywhere in Silk, but it's a nice 
+# convention for passing in role-specific config
+app_config:
+  DEBUG: true
+  DATABASES:
+    default: 
+      ENGINE: django.db.backends.postgresql_psycopg2
+      NAME: mydb
+      USER: me_duh
+      PASSWORD: super_secure_pwd
+      HOST:
+      PORT: 
